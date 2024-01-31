@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<center>
+<html>
+    <head>
+       <title>Age calculator</title>  
+       <link rel="stylesheet" href="style.css">  
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="calculator">
+                <h1>AGE CALCULATOR</h1> <hr>
+                <div class="input-box">
+                    <input type="date" type="number" id="date">
+                    <button onclick="calculateAge()">calculate</button>
+                </div>
+                <p id="result"></p>
+            </div>
+            
+        </div>
+
+        <script>
+            let userInput=document.getElementById("date");
+            userInput.max=new Date().toISOString().split("T")[0];
+            let result=document.getElementById("result");
+
+            function calculateAge(){
+                let bdate=new Date(userInput.value);
+
+                let d1=bdate.getDate();
+                let m1=bdate.getMonth()+1;
+                let y1=bdate.getFullYear();
+
+                let todaydate=new Date();
+
+                let td=todaydate.getDate();
+                let tm=todaydate.getMonth()+1;
+                let ty=todaydate.getFullYear();
+
+
+                let cd,cm,cy;
+
+                cy=ty-y1;
+
+                if(tm>=m1){
+                    cm=tm-m1;
+                }
+                else{
+                    cy--;
+                    cm=12+tm-m1;
+                }
+
+                if(td>=d1){
+                    cd=td-d1;
+                }
+                else{
+                    cm--;
+                    cd=getdays(y1,m1)+td-d1;
+                }
+                if(cm<0){
+                    cm=11;
+                    cy--;
+                }
+                
+                result.innerHTML=`you are <span>${cy}</span> years ,<span>${cm}</span> months,</span>${cd} days</span> old`;
+            }
+            function getdays(year,month){
+                return new Date(year,month,0).getDate();
+            }
+        </script>
+    </body>
+</center>
+</html>
